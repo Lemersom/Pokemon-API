@@ -41,20 +41,20 @@ module.exports = {
         return pokemon
     },
 
-    update: async function(id, obj){
-        let pokemon = await PokemonModel.findByPk(id)
-        if(!pokemon){
-            return false
-        }
-
-        Object.keys(obj.forEach(key => pokemon[key] = obj[key]))
-        await pokemon.save()
-        return pokemon
+    update: async function(id, name, type, trainer){
+        return await PokemonModel.update({name: name, type: type, trainer: trainer}, {
+            where: {id: id}
+        })
     },
 
     delete: async function(id){
         const pokemon = await PokemonModel.findByPk(id)
-        return pokemon.destroy()
+        if(pokemon){
+            return pokemon.destroy()
+        }
+        else{
+            return false
+        }
     },
 
     getById: async function(id){

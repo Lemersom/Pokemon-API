@@ -41,20 +41,20 @@ module.exports = {
         return pokeball
     },
 
-    update: async function(id, obj){
-        let pokeball = await PokeballModel.findByPk(id)
-        if(!pokeball){
-            return false
-        }
-
-        Object.keys(obj.forEach(key => pokeball[key] = obj[key]))
-        await pokeball.save()
-        return pokeball
+    update: async function(id, name, qty, trainer){
+        return await PokeballModel.update({name: name, qty: qty, trainer: trainer}, {
+            where: {id: id}
+        })
     },
 
     delete: async function(id){
         const pokeball = await PokeballModel.findByPk(id)
-        return pokeball.destroy()
+        if(pokeball){
+            return pokeball.destroy()
+        }
+        else{
+            return false
+        } 
     },
 
     getById: async function(id){
