@@ -106,7 +106,7 @@ router.delete('/:id', validateToken, async (req, res) => {
     else{
         let obj = await UserModel.getById(req.params.id)
         if(!obj){
-            res.status(500).json({status: false, msg: 'ERROR: User not found to DELETE'})
+            res.status(500).json({status: false, msg: 'ERROR: User to be DELETED not found'})
         }
         else{
             let result = await UserModel.delete(req.params.id)
@@ -115,6 +115,44 @@ router.delete('/:id', validateToken, async (req, res) => {
             }
             else{
                 res.status(500).json({status: false, msg: 'ERROR: Failed to DELETE the User'})
+            }
+        }
+    }
+})
+
+//Update route
+router.put('/:id', validateToken, async (req, res) => {
+    let user = await UserModel.getByUsername(req.username)
+    if(!user){
+        res.status(500).json({status: false, msg: 'ERROR: User not found'})
+    }
+
+    let obj = await UserModel.getById(req.params.id)
+    if(!obj){
+        res.status(500).json({status: false, msg: 'ERROR: User to be UPDATED not found'})
+    }
+
+    if((JSON.stringify(user) != JSON.stringify(obj)) && !user.admin){
+        res.status(500).json({status: false, msg: 'ERROR: User cannot UPDATE other Users'})
+    }
+    else{
+        const {name, email, username, password, admin} = req.body
+        if(user.admin){
+            let [result] = await UserModel.update(req.params.id ,name, email, username, password, admin)
+            if(result){
+                res.json({status: true, result: result})
+            }
+            else{
+                res.status(500).json({status: false, msg: "ERROR: Failed to UPDATE the User"})
+            }
+        }
+        else{
+            let [result] = await UserModel.update(req.params.id, name, email, username, password, false)
+            if(result){
+                res.json({status: true, result: result})
+            }
+            else{
+                res.status(500).json({status: false, msg: "ERROR: Failed to UPDATE the User"})
             }
         }
     }
