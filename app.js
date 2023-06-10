@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false}))
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use("/install", require("./control/InstallAPI"))
-//app.use("/user", require("./control/UserAPI"))
+app.use("/user", require("./control/UserAPI"))
 app.use("/pokemon", require("./control/PokemonAPI"))
 app.use("/trainer", require("./control/TrainerAPI"))
 app.use("/pokeball", require("./control/PokeballAPI"))
