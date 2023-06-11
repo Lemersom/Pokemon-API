@@ -138,7 +138,7 @@ router.put('/:id', validateToken, async (req, res) => {
     else{
         const {name, email, username, password, admin} = req.body
         if(user.admin){
-            let [result] = await UserModel.update(req.params.id ,name, email, username, password, admin)
+            let [result] = await UserModel.update(req.params.id, name, email, username, password, admin)
             if(result){
                 res.json({status: true, result: result})
             }
@@ -147,7 +147,7 @@ router.put('/:id', validateToken, async (req, res) => {
             }
         }
         else{
-            let [result] = await UserModel.update(req.params.id, name, email, username, password, false)
+            let [result] = await UserModel.update(req.params.id, name, email, obj.username, obj.password, false)
             if(result){
                 res.json({status: true, result: result})
             }
