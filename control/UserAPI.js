@@ -25,12 +25,20 @@ function validateToken(req, res, next){
 router.post('/register', async (req, res) => {
     const {name, email, username, password} = req.body
 
-    let obj = await UserModel.save(name, email, username, password, false, null)
-    if(obj){
-        res.json({status: true, trainer: obj})
+    let exists = await UserModel.Model.findOne({where: {
+        username: username
+    }})
+    if(exists){
+        res.status(500).json({status: false, msg: 'ERROR: Username is already being used'})
     }
     else{
-        res.status(500).json({status: false, msg: 'ERROR: Failed to REGISTER'})
+        let obj = await UserModel.save(name, email, username, password, false, null)
+        if(obj){
+            res.json({status: true, trainer: obj})
+        }
+        else{
+            res.status(500).json({status: false, msg: 'ERROR: Failed to REGISTER'})
+        }
     }
 })
 
@@ -47,7 +55,6 @@ router.post('/login', async (req, res) => {
         let token = jwt.sign({username: username}, '#Abcasdfqwr', {
             expiresIn: '30 min'
         })
-        UserModel.update(obj.id, obj.name, obj.email, obj.username, obj.password, obj.admin, token)
         res.json({status: true, token: token})
     }
     else{
@@ -78,19 +85,28 @@ router.post('/', validateToken, async (req, res) => {
     if(!user){
         res.status(500).json({status: false, msg: 'ERROR: User not found'})
     }
-
+    
     if(!user.admin){
         res.status(500).json({status: false, msg: 'ERROR: User is not admin'})
     }
     else{
-        let obj = await UserModel.save(name, email, username, password, admin)
-        if(obj){
-            res.json({status: true, user: obj})
+        let exists = await UserModel.Model.findOne({where: {
+            username: username
+        }})
+        if(exists){
+            res.status(500).json({status: false, msg: 'ERROR: Username is already being used'})
         }
         else{
-            res.status(500).json({status: false, msg: 'ERROR: Failed to SAVE new User'})
+            let obj = await UserModel.save(name, email, username, password, admin)
+            if(obj){
+                res.json({status: true, user: obj})
+            }
+            else{
+                res.status(500).json({status: false, msg: 'ERROR: Failed to SAVE new User'})
+            }
         }
     }
+    
 })
 
 //Admin deleting non-admin user
@@ -131,29 +147,32 @@ router.put('/:id', validateToken, async (req, res) => {
     if(!obj){
         res.status(500).json({status: false, msg: 'ERROR: User to be UPDATED not found'})
     }
-
-    if((JSON.stringify(user) != JSON.stringify(obj)) && !user.admin){
-        res.status(500).json({status: false, msg: 'ERROR: User cannot UPDATE other Users'})
-    }
     else{
-        const {name, email, username, password, admin} = req.body
-        if(user.admin){
-            let [result] = await UserModel.update(req.params.id, name, email, username, password, admin)
-            if(result){
-                res.json({status: true, result: result})
-            }
-            else{
-                res.status(500).json({status: false, msg: "ERROR: Failed to UPDATE the User"})
-            }
+        if((JSON.stringify(user) != JSON.stringify(obj)) && !user.admin){
+            res.status(500).json({status: false, msg: 'ERROR: User cannot UPDATE other Users'})
         }
         else{
-            let [result] = await UserModel.update(req.params.id, name, email, obj.username, obj.password, false)
-            if(result){
-                res.json({status: true, result: result})
+            const {name, email, admin} = req.body
+    
+            if(user.admin){
+                let [result] = await UserModel.update(req.params.id, name, email, admin)
+                if(result){
+                    res.json({status: true, result: result})
+                }
+                else{
+                    res.status(500).json({status: false, msg: "ERROR: Failed to UPDATE the User"})
+                }
             }
             else{
-                res.status(500).json({status: false, msg: "ERROR: Failed to UPDATE the User"})
+                let [result] = await UserModel.update(req.params.id, name, email, false)
+                if(result){
+                    res.json({status: true, result: result})
+                }
+                else{
+                    res.status(500).json({status: false, msg: "ERROR: Failed to UPDATE the User"})
+                }
             }
+            
         }
     }
 })

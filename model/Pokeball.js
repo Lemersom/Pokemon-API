@@ -6,7 +6,7 @@ const PokeballModel = sequelize.define('Pokeballs',
     {
         name: DataTypes.STRING,
         qty: DataTypes.INTEGER //quantity
-    }
+    }, {timestamps: false}
 )
 
 PokeballModel.belongsTo(Trainer.Model, {

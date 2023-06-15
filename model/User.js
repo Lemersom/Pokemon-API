@@ -22,9 +22,8 @@ const UserModel = sequelize.define("Users",
 
         admin: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
-        },
-        token: DataTypes.STRING
+            defaultValue: false
+        }
     }
 )
 
@@ -34,13 +33,13 @@ module.exports = {
         return users
     },
 
-    save: async function(name, email, username, password, admin, token){
-        const user = await UserModel.create({name: name, email: email, username: username, password: password, admin: admin, token: token})
+    save: async function(name, email, username, password, admin){
+        const user = await UserModel.create({name: name, email: email, username: username, password: password, admin: admin})
         return user
     },
 
-    update: async function(id, name, email, username, password, admin, token){
-        return await UserModel.update({name: name, email: email, username: username, password: password, admin: admin, token: token}, {
+    update: async function(id, name, email, admin){
+        return await UserModel.update({name: name, email: email, admin: admin}, {
             where: {id: id}
         })
     },

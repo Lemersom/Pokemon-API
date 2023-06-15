@@ -3,7 +3,6 @@ const router = express.Router()
 const sequelize = require('../helpers/database')
 
 const jwt = require('jsonwebtoken')
-//const {token} = require('morgan')
 
 const TrainerModel = require('../model/Trainer')
 const PokemonModel = require('../model/Pokemon')
@@ -28,6 +27,7 @@ router.get('/', async (req, res) => {
     const obj = createSuperUser()
     const superUser = await UserModel.save('SuperUser', null, obj.username, obj.password, true, obj.token)
 
+    
     //Trainers
     let trainers = [
         "Red", "Ethan", "Brendan", "Lucas", "Hilbert"
@@ -37,23 +37,37 @@ router.get('/', async (req, res) => {
         listTrainers.push(await TrainerModel.save(trainers[i]))
     }
 
-    //Pokemons
-    let pokemon1 = await PokemonModel.save("Pikachu", "Electric", listTrainers[0].id)
-    let pokemon2 = await PokemonModel.save("Totodile", "Water", listTrainers[1].id)
-    let pokemon3 = await PokemonModel.save("Treecko", "Grass", listTrainers[2].id)
-    let pokemon4 = await PokemonModel.save("Chimchar", "Fire", listTrainers[3].id)
-    let pokemon5 = await PokemonModel.save("Snivy", "Grass", listTrainers[4].id)
 
-    listPokemons = [pokemon1, pokemon2, pokemon3, pokemon4, pokemon5]
+    //Pokemons
+    listPokemons = [
+        await PokemonModel.save("Bulbasaur", "Grass", listTrainers[0].id),
+        await PokemonModel.save("Charmander", "Fire", listTrainers[0].id),
+        await PokemonModel.save("Squirtle", "Water", listTrainers[0].id),
+
+        await PokemonModel.save("Chikorita", "Grass", listTrainers[1].id),
+        await PokemonModel.save("Cyndaquil", "Fire", listTrainers[1].id),
+        await PokemonModel.save("Totodile", "Water", listTrainers[1].id),
+
+        await PokemonModel.save("Mudkip", "Water", listTrainers[2].id),
+        await PokemonModel.save("Corphish", "Water", listTrainers[2].id),
+        await PokemonModel.save("Feebas", "Water", listTrainers[2].id),
+
+        await PokemonModel.save("Chimchar", "Fire", listTrainers[3].id),
+        await PokemonModel.save("Turtwig", "Grass", listTrainers[3].id),
+
+        await PokemonModel.save("Tepig", "Fire", listTrainers[4].id)
+    ]
+
 
     //Pokeballs
-    let pokeball1 = await PokeballModel.save("Poke Ball", 10, listTrainers[0].id)
-    let pokeball2 = await PokeballModel.save("Great Ball", 5, listTrainers[1].id)
-    let pokeball3 = await PokeballModel.save("Quick Ball", 8, listTrainers[2].id)
-    let pokeball4 = await PokeballModel.save("Ultra Ball", 3, listTrainers[3].id)
-    let pokeball5 = await PokeballModel.save("Master Ball", 1, listTrainers[4].id)
+    listPokeballs = [
+        await PokeballModel.save("Poke Ball", 10, listTrainers[0].id),
+        await PokeballModel.save("Great Ball", 5, listTrainers[1].id),
+        await PokeballModel.save("Quick Ball", 8, listTrainers[2].id),
+        await PokeballModel.save("Ultra Ball", 3, listTrainers[3].id),
+        await PokeballModel.save("Master Ball", 1, listTrainers[4].id),
+    ]
 
-    listPokeballs = [pokeball1, pokeball2, pokeball3, pokeball4, pokeball5]
 
     res.json({status:true, superUser: superUser, trainers: listTrainers, pokemons: listPokemons, pokeballs: listPokeballs})
 })

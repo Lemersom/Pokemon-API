@@ -9,7 +9,7 @@ const TrainerModel = sequelize.define("Trainers",
             primaryKey: true
         },
         name: DataTypes.STRING
-    }
+    }, {timestamps: false}
 )
 
 module.exports = {

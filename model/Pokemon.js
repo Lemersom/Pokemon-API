@@ -5,8 +5,8 @@ const Trainer = require('./Trainer')
 const PokemonModel = sequelize.define('Pokemons', 
     {
         name: DataTypes.STRING,
-        type: DataTypes.STRING
-    }
+        type: DataTypes.STRING,
+    }, {timestamps: false}
 )
 
 PokemonModel.belongsTo(Trainer.Model, {
