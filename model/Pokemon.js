@@ -15,8 +15,12 @@ PokemonModel.belongsTo(Trainer.Model, {
 Trainer.Model.hasMany(PokemonModel, {foreignKey: 'trainer'})
 
 module.exports = {
-    list: async function(){
-        const pokemons = await PokemonModel.findAll({include: Trainer.Model})
+    list: async function(limit, offset){
+        const pokemons = await PokemonModel.findAll({
+            include: Trainer.Model,
+            limit: limit,
+            offset: offset
+        })
         return pokemons
     },
 

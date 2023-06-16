@@ -63,7 +63,20 @@ router.post('/login', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-    let users = await UserModel.list()
+    //Query params exemple: ?limit=5&page=2
+    let limit = req.query.limit
+    let page = req.query.page
+
+    if(!limit){
+        limit = await UserModel.Model.count()
+    }
+    if(!page){
+        page = 1
+    }
+
+    let offset = (limit * page) - limit
+
+    let users = await UserModel.list(limit, offset)
     res.json({status: true, list:users})
 })
 

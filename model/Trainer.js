@@ -13,8 +13,11 @@ const TrainerModel = sequelize.define("Trainers",
 )
 
 module.exports = {
-    list: async function(){
-        const trainers = await TrainerModel.findAll()
+    list: async function(limit, offset){
+        const trainers = await TrainerModel.findAll({
+            limit: limit,
+            offset: offset
+        })
         return trainers
     },
 

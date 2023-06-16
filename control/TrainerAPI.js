@@ -4,7 +4,20 @@ const router = express.Router()
 const TrainerModel = require('../model/Trainer')
 
 router.get('/', async (req, res) => {
-    let trainers = await TrainerModel.list()
+    //Query params exemple: ?limit=5&page=2
+    let limit = req.query.limit
+    let page = req.query.page
+
+    if(!limit){
+        limit = await TrainerModel.Model.count()
+    }
+    if(!page){
+        page = 1
+    }
+
+    let offset = (limit * page) - limit
+
+    let trainers = await TrainerModel.list(limit, offset)
     res.json({status: true, list:trainers})
 })
 

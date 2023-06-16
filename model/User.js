@@ -28,8 +28,11 @@ const UserModel = sequelize.define("Users",
 )
 
 module.exports = {
-    list: async function(){
-        const users = await UserModel.findAll()
+    list: async function(limit, offset){
+        const users = await UserModel.findAll({
+            limit: limit,
+            offset: offset
+        })
         return users
     },
 

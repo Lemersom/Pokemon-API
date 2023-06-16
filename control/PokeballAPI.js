@@ -4,7 +4,20 @@ const router = express.Router()
 const PokeballModel = require('../model/Pokeball')
 
 router.get('/', async (req, res) => {
-    let pokeballs = await PokeballModel.list()
+    //Query params exemple: ?limit=5&page=2
+    let limit = req.query.limit
+    let page = req.query.page
+
+    if(!limit){
+        limit = await PokeballModel.Model.count()
+    }
+    if(!page){
+        page = 1
+    }
+
+    let offset = (limit * page) - limit
+
+    let pokeballs = await PokeballModel.list(limit, offset)
     res.json({status: true, list:pokeballs})
 })
 
