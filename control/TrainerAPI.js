@@ -66,4 +66,31 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.post('/duel', async (req, res) => {
+    const trainer1 = await TrainerModel.getById(req.body.trainer1)
+    const trainer2 = await TrainerModel.getById(req.body.trainer2)
+
+    if(!trainer1 || !trainer2){
+        res.status(500).json({status: false, msg: 'ERROR: Trainers not found'})
+    }
+    else if(trainer1 == trainer2){
+        res.status(500).json({status: false, msg: 'ERROR: Trainer cannot duel with himself'})
+    }
+    else{
+        let duel = await TrainerModel.duel(trainer1, trainer2)
+        if(duel == "draw"){
+            res.json({status: true, msg: "Both teams have the same efficiency"})
+        }
+        else if(duel == trainer1){
+            res.json({status: true, msg: "Trainer1's team is more efficient"})
+        }
+        else if(duel == trainer2){
+            res.json({status: true, msg: "Trainer2's team is more efficient"})
+        }
+        else{
+            res.status(500).json({status: false, msg: 'ERROR: Duel error'})
+        }
+    }
+})
+
 module.exports = router

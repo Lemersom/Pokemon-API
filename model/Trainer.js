@@ -46,5 +46,70 @@ module.exports = {
         }}})
     },
 
+    duel: async function(trainer1, trainer2){
+        const Pokemon = require('./Pokemon')
+        const pokesQty = await Pokemon.Model.count()
+        
+        let pokes1 = []
+        let pokes2 = []
+        for(let i = 1; i <= pokesQty; i++){
+            let poke = await Pokemon.getById(i)
+            if(poke.trainer == trainer1.id){
+                pokes1.push(poke.type)
+            }
+            else if(poke.trainer == trainer2.id){
+                pokes2.push(poke.type)
+            }
+        }
+
+        //remove duplicates
+        let uniqueTypes1 = [...new Set(pokes1)]
+        let uniqueTypes2 = [...new Set(pokes2)]
+
+        let fault1 = pokes1.length - uniqueTypes1.length
+        let fault2 = pokes2.length - uniqueTypes2.length
+
+        let points1 = fault2 + pokes1.length
+        let points2 = fault1 + pokes2.length
+
+        for(let i = 0; i < pokes2.length; i++){
+            for(let j = 0; j < pokes1.length; j++){
+                if(pokes1[j] == 'Fire' && pokes2[i] == 'Grass'){
+                    points1++
+                }
+                else if(pokes1[j] == 'Water' && pokes2[i] == 'Fire'){
+                    points1++
+                }
+                else if(pokes1[j] == 'Grass' && pokes2[i] == 'Water'){
+                    points1++
+                }
+            }
+        }
+
+        for(let i = 0; i < pokes1.length; i++){
+            for(let j = 0; j < pokes2.length; j++){
+                if(pokes2[j] == 'Fire' && pokes1[i] == 'Grass'){
+                    points2++
+                }
+                else if(pokes2[j] == 'Water' && pokes1[i] == 'Fire'){
+                    points2++
+                }
+                else if(pokes2[j] == 'Grass' && pokes1[i] == 'Water'){
+                    points2++
+                }
+            }
+        }
+        
+        if(points1 == points2){
+            return "draw"
+        }
+        else if(points1 > points2){
+            return trainer1
+        }
+        else if(points2 > points1){
+            return trainer2
+        }
+    },
+
     Model: TrainerModel
 }
