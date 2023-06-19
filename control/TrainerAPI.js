@@ -1,7 +1,26 @@
 const express = require('express')
 const router = express.Router()
+const jwt = require('jsonwebtoken')
 
 const TrainerModel = require('../model/Trainer')
+
+
+function validateToken(req, res, next){
+    let token_full = req.headers['authorization']
+    if(!token_full){
+        token_full = ''
+    }
+    let token = token_full.split(': ')[1]
+    jwt.verify(token, '#Abcasdfqwr', (error, payload) => {
+        if(error){
+            res.status(403).json({status: false, msg: 'Access denied - Invalid token', token: token})
+            return
+        }
+        req.username = payload.username
+        next()
+    })
+}
+
 
 router.get('/', async (req, res) => {
     //Query params exemple: ?limit=5&page=2
@@ -31,7 +50,7 @@ router.get('/:id', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', validateToken, async (req, res) => {
     const {name} = req.body
 
     let obj = await TrainerModel.save(name)
@@ -43,7 +62,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', validateToken, async (req, res) => {
     const {id} = req.params
     const {name} = req.body
 
@@ -56,7 +75,7 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', validateToken, async (req, res) => {
     let result = await TrainerModel.delete(req.params.id)
     if(result){
         res.json({status: true, result: result})
@@ -66,14 +85,14 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.post('/duel', async (req, res) => {
+router.post('/duel', validateToken, async (req, res) => {
     const trainer1 = await TrainerModel.getById(req.body.trainer1)
     const trainer2 = await TrainerModel.getById(req.body.trainer2)
 
     if(!trainer1 || !trainer2){
         res.status(500).json({status: false, msg: 'ERROR: Trainers not found'})
     }
-    else if(trainer1 == trainer2){
+    else if(trainer1.id == trainer2.id){
         res.status(500).json({status: false, msg: 'ERROR: Trainer cannot duel with himself'})
     }
     else{

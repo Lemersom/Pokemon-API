@@ -32,7 +32,7 @@ router.post('/register', async (req, res) => {
         res.status(500).json({status: false, msg: 'ERROR: Username is already being used'})
     }
     else{
-        let obj = await UserModel.save(name, email, username, password, false, null)
+        let obj = await UserModel.save(name, email, username, password, false)
         if(obj){
             res.json({status: true, trainer: obj})
         }
@@ -50,15 +50,16 @@ router.post('/login', async (req, res) => {
     if(!obj){
         res.status(500).json({status: false, msg: 'ERROR: User not found'})
     }
-
-    if(obj.password == password){
-        let token = jwt.sign({username: username}, '#Abcasdfqwr', {
-            expiresIn: '30 min'
-        })
-        res.json({status: true, token: token})
-    }
     else{
-        res.status(500).json({status: false, msg: 'ERROR: Invalid Username/Password'})
+        if(obj.password == password){
+            let token = jwt.sign({username: username}, '#Abcasdfqwr', {
+                expiresIn: '30 min'
+            })
+            res.json({status: true, token: token})
+        }
+        else{
+            res.status(500).json({status: false, msg: 'ERROR: Invalid Username/Password'})
+        }
     }
 })
 
@@ -138,12 +139,17 @@ router.delete('/:id', validateToken, async (req, res) => {
             res.status(500).json({status: false, msg: 'ERROR: User to be DELETED not found'})
         }
         else{
-            let result = await UserModel.delete(req.params.id)
-            if(result){
-                res.json({status: true, result: result})
+            if(obj.admin){
+                res.status(500).json({status: false, msg: 'ERROR: Cannot DELETE an Admin'})
             }
             else{
-                res.status(500).json({status: false, msg: 'ERROR: Failed to DELETE the User'})
+                let result = await UserModel.delete(req.params.id)
+                if(result){
+                    res.json({status: true, result: result})
+                }
+                else{
+                    res.status(500).json({status: false, msg: 'ERROR: Failed to DELETE the User'})
+                }
             }
         }
     }

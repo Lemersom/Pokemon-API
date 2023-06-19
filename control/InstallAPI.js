@@ -14,7 +14,7 @@ function createSuperUser(){
     const password = 'SuperUser'
     
     let token = jwt.sign({username: username}, '#Abcasdfqwr', {
-        expiresIn: '30 min'
+        expiresIn: '60 min'
     })
 
     return {username, password, token}
