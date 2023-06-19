@@ -1,6 +1,7 @@
 const {DataTypes, Op} = require('sequelize')
 const sequelize = require('../helpers/database')
 
+
 const TrainerModel = sequelize.define("Trainers",
     {
         id: {
@@ -48,17 +49,22 @@ module.exports = {
 
     duel: async function(trainer1, trainer2){
         const Pokemon = require('./Pokemon')
-        const pokesQty = await Pokemon.Model.count()
+        let pokesQty = await Pokemon.Model.count()
         
         let pokes1 = []
         let pokes2 = []
         for(let i = 1; i <= pokesQty; i++){
             let poke = await Pokemon.getById(i)
-            if(poke.trainer == trainer1.id){
-                pokes1.push(poke.type)
+            if(poke){
+                if(poke.trainer == trainer1.id){
+                    pokes1.push(poke.type)
+                }
+                else if(poke.trainer == trainer2.id){
+                    pokes2.push(poke.type)
+                }
             }
-            else if(poke.trainer == trainer2.id){
-                pokes2.push(poke.type)
+            else{
+                pokesQty++ //pokemon deleted
             }
         }
 

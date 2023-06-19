@@ -10,9 +10,13 @@ const PokemonModel = sequelize.define('Pokemons',
 )
 
 PokemonModel.belongsTo(Trainer.Model, {
-    foreignKey: 'trainer'
+    foreignKey: 'trainer',
+    onDelete: 'CASCADE'
 })
-Trainer.Model.hasMany(PokemonModel, {foreignKey: 'trainer'})
+Trainer.Model.hasMany(PokemonModel, {
+    foreignKey: 'trainer',
+    onDelete: 'CASCADE'
+})
 
 module.exports = {
     list: async function(limit, offset){
