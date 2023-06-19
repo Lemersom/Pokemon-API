@@ -1,3 +1,3 @@
 # Pokémon - API
 
-Projeto Programação Web Back-End
+Final Project of the course "Web Back-end Programming".
