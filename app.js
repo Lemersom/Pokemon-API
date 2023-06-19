@@ -4,16 +4,11 @@ require('dotenv').config()
 
 var app = express()
 
-var mustacheExpress = require('mustache-express')
-var engine = mustacheExpress()
-app.engine('mustache', engine)
-
 app.set('views', path.join(__dirname), 'views')
 app.set('view engine', 'mustache')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false}))
-app.use(express.static(path.join(__dirname, 'public')))
 
 app.use("/install", require("./control/InstallAPI"))
 app.use("/user", require("./control/UserAPI"))
