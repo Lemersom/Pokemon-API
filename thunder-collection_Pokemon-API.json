@@ -1,0 +1,525 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Pokemon-API",
+    "dateExported": "2023-06-19T04:15:41.128Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "User",
+            "containerId": "",
+            "created": "2023-06-19T03:12:28.467Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "61e0f4a1-c6da-47da-b62e-c11ac8a34525",
+            "name": "Trainer",
+            "containerId": "",
+            "created": "2023-06-19T03:12:28.468Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "c2a4d8eb-d415-44ea-835e-388c8b0db464",
+            "name": "Pokemon",
+            "containerId": "",
+            "created": "2023-06-19T03:12:28.469Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "bf12d4c0-46f1-4def-80fd-8a25ee18c203",
+            "name": "Pokeball",
+            "containerId": "",
+            "created": "2023-06-19T03:12:28.471Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "a44681dc-8fce-4ac4-89ca-5083bbdd47a5",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "",
+            "name": "Install",
+            "url": "http://localhost:3000/install",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-06-19T03:12:28.468Z",
+            "modified": "2023-06-19T03:12:28.468Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "399ab1ae-1bc8-48f0-8688-b83912e6f2d6",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Register",
+            "url": "http://localhost:3000/user/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-06-19T03:12:28.469Z",
+            "modified": "2023-06-19T03:12:28.469Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"user1\",\n  \"email\": \"user1@email.com\",\n  \"username\": \"user1\",\n  \"password\": \"user1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9e2a92af-1115-479f-b15a-79f1907dfa01",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Login superuser",
+            "url": "http://localhost:3000/user/login",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-06-19T03:12:28.470Z",
+            "modified": "2023-06-19T03:12:28.470Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"SuperUser\",\n  \"password\": \"SuperUser\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2104857d-3346-49b0-b18f-c91b15d4a5ac",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Login user1",
+            "url": "http://localhost:3000/user/login",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-06-19T03:12:28.471Z",
+            "modified": "2023-06-19T03:12:28.471Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"user1\",\n  \"password\": \"user1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "68086d1c-3cdf-47be-b79d-fa88b6eb4951",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Create user",
+            "url": "http://localhost:3000/user/",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-06-19T03:12:28.472Z",
+            "modified": "2023-06-19T03:59:55.750Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"user2\",\n  \"email\": \"user2@email.com\",\n  \"username\": \"user2\",\n  \"password\": \"user2\",\n  \"admin\": true\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8f9b8bdb-0aec-4da7-8522-021c1bb3fec3",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Update user",
+            "url": "http://localhost:3000/user/3",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2023-06-19T03:12:28.473Z",
+            "modified": "2023-06-19T04:00:02.938Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"user2\",\n  \"email\": \"user2@email.com\",\n  \"username\": \"user2\",\n  \"password\": \"user2\",\n  \"admin\": false\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8d9f3681-f307-484e-aaa8-ffec36ee00f8",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Delete user",
+            "url": "http://localhost:3000/user/3",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2023-06-19T03:12:28.474Z",
+            "modified": "2023-06-19T04:00:08.617Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "10a43ec2-dba6-4320-9ff1-7d994dc658d5",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Update other users",
+            "url": "http://localhost:3000/user/2",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2023-06-19T03:12:28.475Z",
+            "modified": "2023-06-19T04:00:16.365Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"user1@email.com\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2a7b9f6c-fe27-4723-b109-93bd9feb445c",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "61e0f4a1-c6da-47da-b62e-c11ac8a34525",
+            "name": "Create Trainer",
+            "url": "http://localhost:3000/trainer/",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2023-06-19T03:12:28.476Z",
+            "modified": "2023-06-19T04:00:27.858Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"test\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "529fd51d-891f-4b97-b045-27ebe0f14d36",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "61e0f4a1-c6da-47da-b62e-c11ac8a34525",
+            "name": "Update Trainer",
+            "url": "http://localhost:3000/trainer/6",
+            "method": "PUT",
+            "sortNum": 100000,
+            "created": "2023-06-19T03:12:28.477Z",
+            "modified": "2023-06-19T04:00:34.932Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Ash\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "59898e02-8204-4a1f-b4b2-1e4f97562a5d",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "61e0f4a1-c6da-47da-b62e-c11ac8a34525",
+            "name": "Delete Trainer",
+            "url": "http://localhost:3000/trainer/5",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2023-06-19T03:12:28.478Z",
+            "modified": "2023-06-19T03:50:43.162Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NjYzNSwiZXhwIjoxNjg3MTQ4NDM1fQ.Udk0w0pFi18f6QbIgdO3XEEm-3zEM1Z125-BvPEyxLs"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2aaa98cc-15b5-46e6-ae00-a9249fb30d4b",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "c2a4d8eb-d415-44ea-835e-388c8b0db464",
+            "name": "Create Pokemon",
+            "url": "http://localhost:3000/pokemon/",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2023-06-19T03:12:28.479Z",
+            "modified": "2023-06-19T04:00:59.689Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Charizard\",\n  \"type\": \"Fire\",\n  \"trainer\": 6\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "869c8d72-7583-41b3-bac8-63af5c903191",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "c2a4d8eb-d415-44ea-835e-388c8b0db464",
+            "name": "Update Pokemon",
+            "url": "http://localhost:3000/pokemon/13",
+            "method": "PUT",
+            "sortNum": 130000,
+            "created": "2023-06-19T03:12:28.480Z",
+            "modified": "2023-06-19T04:01:10.967Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Chikorita\",\n  \"type\": \"Grass\",\n  \"trainer\": 6\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "2d777957-a229-4f91-a0f1-c3a68e69ea8a",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "c2a4d8eb-d415-44ea-835e-388c8b0db464",
+            "name": "Delete Pokemon",
+            "url": "http://localhost:3000/pokemon/1",
+            "method": "DELETE",
+            "sortNum": 140000,
+            "created": "2023-06-19T03:12:28.481Z",
+            "modified": "2023-06-19T03:58:59.667Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzEyOCwiZXhwIjoxNjg3MTQ4OTI4fQ.ikDqM8kWESv_1_XdTiFaBDe9bhzIKTSPNHhKOAodlQo"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "da272759-603b-4110-8494-b411b255211f",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "",
+            "name": "Duel",
+            "url": "http://localhost:3000/trainer/duel",
+            "method": "POST",
+            "sortNum": 150000,
+            "created": "2023-06-19T03:12:28.482Z",
+            "modified": "2023-06-19T04:14:12.142Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"trainer1\": 3,\n  \"trainer2\": 6\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "aa9e89d3-35cb-4bdc-99d0-c0d649392ccf",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "bf12d4c0-46f1-4def-80fd-8a25ee18c203",
+            "name": "Create Pokeball",
+            "url": "http://localhost:3000/pokeball/",
+            "method": "POST",
+            "sortNum": 160000,
+            "created": "2023-06-19T03:12:28.483Z",
+            "modified": "2023-06-19T04:01:52.564Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Test Ball\",\n  \"qty\": 10000,\n  \"trainer\": 6\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3c2814c5-2f4d-49a2-8c5d-1ea121e882e6",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "bf12d4c0-46f1-4def-80fd-8a25ee18c203",
+            "name": "Update Pokeball",
+            "url": "http://localhost:3000/pokeball/6",
+            "method": "PUT",
+            "sortNum": 170000,
+            "created": "2023-06-19T03:12:28.484Z",
+            "modified": "2023-06-19T04:02:04.798Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Test Ball2\",\n  \"qty\": 1,\n  \"trainer\": 6\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "da054766-c992-4bc7-a419-77e264d29f3b",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "bf12d4c0-46f1-4def-80fd-8a25ee18c203",
+            "name": "Delete Pokeball",
+            "url": "http://localhost:3000/pokeball/6",
+            "method": "DELETE",
+            "sortNum": 180000,
+            "created": "2023-06-19T03:12:28.485Z",
+            "modified": "2023-06-19T04:02:15.354Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN1cGVyVXNlciIsImlhdCI6MTY4NzE0NzE3OSwiZXhwIjoxNjg3MTQ4OTc5fQ.INKjZH4ZjB00RGmbesLU8nVFEqMPmeWbgPLE6CxYAoQ"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c6a9537a-598e-40e6-8811-42fdb1d27ab2",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "58b04f8f-b2ae-4bef-a9af-036d77400e22",
+            "name": "Users pagination",
+            "url": "http://localhost:3000/user/?limit=1&page=2",
+            "method": "GET",
+            "sortNum": 190000,
+            "created": "2023-06-19T03:12:28.486Z",
+            "modified": "2023-06-19T03:12:28.486Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "2c928678-c267-4639-9ce3-6496e16346d5",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "61e0f4a1-c6da-47da-b62e-c11ac8a34525",
+            "name": "Trainers pagination",
+            "url": "http://localhost:3000/trainer/?limit=3&page=1",
+            "method": "GET",
+            "sortNum": 200000,
+            "created": "2023-06-19T03:12:28.487Z",
+            "modified": "2023-06-19T03:12:28.487Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "3",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "33e317d5-1cdb-409e-a3a0-be3e6fd006da",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "c2a4d8eb-d415-44ea-835e-388c8b0db464",
+            "name": "Pokemons pagination",
+            "url": "http://localhost:3000/pokemon/?limit=3&page=2",
+            "method": "GET",
+            "sortNum": 210000,
+            "created": "2023-06-19T03:12:28.488Z",
+            "modified": "2023-06-19T03:12:28.488Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "3",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "0a995874-02fe-42b2-9084-d060f83b84b7",
+            "colId": "3a7714f2-10ec-40d6-babd-d12af541bb40",
+            "containerId": "bf12d4c0-46f1-4def-80fd-8a25ee18c203",
+            "name": "Pokeballs pagination",
+            "url": "http://localhost:3000/pokeball/?limit=2&page=2",
+            "method": "GET",
+            "sortNum": 220000,
+            "created": "2023-06-19T03:12:28.489Z",
+            "modified": "2023-06-19T03:12:28.489Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "limit",
+                    "value": "2",
+                    "isPath": false
+                },
+                {
+                    "name": "page",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        }
+    ]
+}
