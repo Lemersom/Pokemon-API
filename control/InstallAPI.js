@@ -13,7 +13,7 @@ function createSuperUser(){
     const username = 'SuperUser'
     const password = 'SuperUser'
     
-    let token = jwt.sign({username: username}, '#Abcasdfqwr', {
+    let token = jwt.sign({username: username}, process.env.TOKEN_KEY, {
         expiresIn: '60 min'
     })
 
@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
     for(let i = 0; i < trainers.length; i++){
         listTrainers.push(await TrainerModel.save(trainers[i]))
     }
-
+    
 
     //Pokemons
     listPokemons = [

@@ -9,7 +9,11 @@ const TrainerModel = sequelize.define("Trainers",
             autoIncrement: true,
             primaryKey: true
         },
-        name: DataTypes.STRING
+        name: DataTypes.STRING,
+        wins: {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        }
     }, {timestamps: false}
 )
 
@@ -110,9 +114,15 @@ module.exports = {
             return "draw"
         }
         else if(points1 > points2){
+            await TrainerModel.update({wins: (trainer1.wins + 1)}, {
+                where: {id: trainer1.id}
+            })
             return trainer1
         }
         else if(points2 > points1){
+            await TrainerModel.update({wins: (trainer2.wins + 1)}, {
+                where: {id: trainer2.id}
+            })
             return trainer2
         }
     },

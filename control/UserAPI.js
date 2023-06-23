@@ -11,7 +11,7 @@ function validateToken(req, res, next){
         token_full = ''
     }
     let token = token_full.split(': ')[1]
-    jwt.verify(token, '#Abcasdfqwr', (error, payload) => {
+    jwt.verify(token, process.env.TOKEN_KEY, (error, payload) => {
         if(error){
             res.status(403).json({status: false, msg: 'Access denied - Invalid token', token: token})
             return
@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
     }
     else{
         if(obj.password == password){
-            let token = jwt.sign({username: username}, '#Abcasdfqwr', {
+            let token = jwt.sign({username: username}, process.env.TOKEN_KEY, {
                 expiresIn: '30 min'
             })
             res.json({status: true, token: token})

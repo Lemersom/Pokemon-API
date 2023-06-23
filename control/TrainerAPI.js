@@ -11,7 +11,7 @@ function validateToken(req, res, next){
         token_full = ''
     }
     let token = token_full.split(': ')[1]
-    jwt.verify(token, '#Abcasdfqwr', (error, payload) => {
+    jwt.verify(token, process.env.TOKEN_KEY, (error, payload) => {
         if(error){
             res.status(403).json({status: false, msg: 'Access denied - Invalid token', token: token})
             return
@@ -86,29 +86,44 @@ router.delete('/:id', validateToken, async (req, res) => {
 })
 
 router.post('/duel', validateToken, async (req, res) => {
-    const trainer1 = await TrainerModel.getById(req.body.trainer1)
-    const trainer2 = await TrainerModel.getById(req.body.trainer2)
-
-    if(!trainer1 || !trainer2){
+    if((req.body.trainer1 == null) || (req.body.trainer2 == null)){
         res.status(500).json({status: false, msg: 'ERROR: Trainers not found'})
     }
-    else if(trainer1.id == trainer2.id){
-        res.status(500).json({status: false, msg: 'ERROR: Trainer cannot duel with himself'})
-    }
     else{
-        let duel = await TrainerModel.duel(trainer1, trainer2)
-        if(duel == "draw"){
-            res.json({status: true, msg: "Both teams have the same efficiency"})
+        const trainer1 = await TrainerModel.getById(req.body.trainer1)
+        const trainer2 = await TrainerModel.getById(req.body.trainer2)
+
+        if(!trainer1 || !trainer2){
+            res.status(500).json({status: false, msg: 'ERROR: Trainers not found'})
         }
-        else if(duel == trainer1){
-            res.json({status: true, msg: "Trainer1's team is more efficient"})
-        }
-        else if(duel == trainer2){
-            res.json({status: true, msg: "Trainer2's team is more efficient"})
+        else if(trainer1.id == trainer2.id){
+            res.status(500).json({status: false, msg: 'ERROR: Trainer cannot duel with himself'})
         }
         else{
-            res.status(500).json({status: false, msg: 'ERROR: Duel error'})
+            let duel = await TrainerModel.duel(trainer1, trainer2)
+            if(duel == "draw"){
+                res.json({status: true, msg: "Both teams have the same efficiency"})
+            }
+            else if(duel == trainer1){
+                res.json({status: true, msg: "Trainer1's team is more efficient"})
+            }
+            else if(duel == trainer2){
+                res.json({status: true, msg: "Trainer2's team is more efficient"})
+            }
+            else{
+                res.status(500).json({status: false, msg: 'ERROR: Duel error'})
+            }
         }
+    }
+})
+
+router.get('/wins/:id', async (req, res) => {
+    let obj = await TrainerModel.getById(req.params.id)
+    if(obj){
+        res.json({status: true, trainer:obj.name, wins: obj.wins})
+    }
+    else{
+        res.status(500).json({status: false, msg: 'Trainer not found'})
     }
 })
 
